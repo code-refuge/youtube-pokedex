@@ -1,4 +1,5 @@
 import React from 'react';
+import Pokedex from './pokedex/Pokedex';
 
 interface AppProps {
 
@@ -7,7 +8,7 @@ interface AppProps {
 const App: React.FC<AppProps> = () => {
   return (
     <div>
-
+      <Pokedex></Pokedex>
     </div>
   );
 };
