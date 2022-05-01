@@ -1,4 +1,4 @@
-import { Card, CardMedia, CardHeader } from '@material-ui/core';
+import { Card, CardMedia, CardHeader } from '@mui/material';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { PokemonDetail } from '../../pokemon/interfaces/PokemonDetail';

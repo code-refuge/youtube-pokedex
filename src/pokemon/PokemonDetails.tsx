@@ -1,4 +1,4 @@
-import { AppBar, Toolbar, Typography, Container, Button, LinearProgress } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, Container, Button, LinearProgress } from '@mui/material';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
