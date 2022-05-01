@@ -1,5 +1,6 @@
 import React from 'react';
-import Pokedex from './pokedex/Pokedex';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './routes';
 
 interface AppProps {
 
@@ -7,9 +8,9 @@ interface AppProps {
 
 const App: React.FC<AppProps> = () => {
   return (
-    <div>
-      <Pokedex></Pokedex>
-    </div>
+    <BrowserRouter>
+      <Routes />
+    </BrowserRouter>
   );
 };
 
