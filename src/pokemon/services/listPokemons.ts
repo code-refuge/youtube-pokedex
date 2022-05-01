@@ -21,6 +21,9 @@ export async function listPokemons(): Promise<ListPokemonsInterface> {
 
   const promiseArr = response.data.results.map(async (pokemon) => getPokemonDetails(pokemon.name));
 
+  // wait 10 seconds before continue
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
   const resultsPromise = await Promise.all(promiseArr);
 
   return {

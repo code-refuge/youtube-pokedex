@@ -1,22 +1,18 @@
-import { AppBar, Toolbar, IconButton, Typography, Container, Grid } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, Container, Grid, Button, LinearProgress } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
-import React, { useEffect, useState } from 'react';
-import { PokemonDetail } from '../pokemon/interfaces/PokemonDetail';
+import React from 'react';
+import { useQuery } from 'react-query';
 import { listPokemons } from '../pokemon/services/listPokemons';
 import PokedexCard from './components/PokedexCard';
+
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 interface PokedexProps {
 
 }
 
 const Pokedex: React.FC<PokedexProps> = () => {
-  const [pokemons, setPokemons] = useState<PokemonDetail[]>([]);
-
-  useEffect(() => {
-    listPokemons().then((response) => {
-      setPokemons(response.results);
-    });
-  }, []);
+  const { data, isLoading, isRefetching, refetch } = useQuery(`listPokemons`, listPokemons);
 
   return (
     <div>
@@ -30,17 +26,27 @@ const Pokedex: React.FC<PokedexProps> = () => {
           </Typography>
         </Toolbar>
       </AppBar>
+      {isRefetching && <LinearProgress />}
 
       <Container>
-        <>
-          <Grid container spacing={2}>
-            {pokemons.map((pokemon) => (
-              <Grid item xs={12} sm={6} md={4} lg={3} key={pokemon.name}>
-                <PokedexCard pokemon={pokemon} />
+        <div style={{ marginTop: `1em` }}>
+          {isLoading ? (
+            <>
+              <CircularProgress />
+            </>
+          ) : (
+            <>
+              <Button onClick={() => refetch()}>refetch</Button>
+              <Grid container spacing={2}>
+                {data?.results.map((pokemon) => (
+                  <Grid item xs={12} sm={6} md={4} lg={3} key={pokemon.name}>
+                    <PokedexCard pokemon={pokemon} />
+                  </Grid>
+                ))}
               </Grid>
-            ))}
-          </Grid>
-        </>
+            </>
+          )}
+        </div>
       </Container>
     </div>
   );
