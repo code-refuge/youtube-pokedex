@@ -1,7 +1,9 @@
-import { AppBar, Toolbar, Typography, Container, Button, LinearProgress } from '@mui/material';
-import React from 'react';
+import { Favorite } from '@mui/icons-material';
+import { AppBar, Toolbar, Typography, Container, Button, LinearProgress, Badge, Box, IconButton } from '@mui/material';
+import React, { useContext } from 'react';
 import { useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
+import { FavoriteContext } from '../favorites/contexts/FavoriteContext';
 import { getPokemonDetails } from './services/getPokemonDetails';
 
 interface PokemonDetailsProps {
@@ -13,6 +15,7 @@ interface PokemonQueryParams {
 }
 
 export const PokemonDetails: React.FC<PokemonDetailsProps> = () => {
+  const { favorites, setFavorites } = useContext(FavoriteContext);
   const { goBack } = useHistory();
   const { name } = useParams<PokemonQueryParams>();
 
@@ -26,6 +29,18 @@ export const PokemonDetails: React.FC<PokemonDetailsProps> = () => {
   );
 
   const selectedPokemonDetails = data;
+
+  const addPokemonToFavorite = () => {
+    if (!selectedPokemonDetails) return;
+    setFavorites([...favorites, selectedPokemonDetails]);
+  }
+
+  const removePokemonFromFavorites = () => {
+    if (!selectedPokemonDetails) return;
+    setFavorites(favorites.filter((poke) => poke.name !== selectedPokemonDetails.name));
+  }
+
+  const isFavorite = favorites.some((poke) => poke.name === selectedPokemonDetails?.name);
 
   if (isLoading) {
     return (
@@ -43,6 +58,12 @@ export const PokemonDetails: React.FC<PokemonDetailsProps> = () => {
           <Typography variant="h6" >
             {selectedPokemonDetails?.name}
           </Typography>
+          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <IconButton onClick={() => isFavorite ? removePokemonFromFavorites() : addPokemonToFavorite()} aria-label="add to favorites">
+              <Favorite color={isFavorite ? `error` : `disabled`} />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
       {isRefetching && <LinearProgress />}
