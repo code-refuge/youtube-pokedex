@@ -63,6 +63,7 @@ const Pokedex: React.FC<PokedexProps> = () => {
             <>
               <Button onClick={() => refetch()}>refetch</Button>
               <Grid container spacing={2}>
+                Deploy automatizado
                 {data?.results.map((pokemon) => (
                   <Grid item xs={12} sm={6} md={4} lg={3} key={pokemon.name}>
                     <PokedexCard pokemon={pokemon} />
