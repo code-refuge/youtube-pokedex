@@ -1,5 +1,5 @@
 import { AppBar, Toolbar, IconButton, Typography, Container, Grid, Button, LinearProgress, Badge } from '@mui/material';
-import { Favorite, Menu as MenuIcon, More } from '@mui/icons-material';
+import { Favorite, Menu as MenuIcon } from '@mui/icons-material';
 import React, { useContext } from 'react';
 import { useQuery } from 'react-query';
 import { listPokemons } from '../pokemon/services/listPokemons';
@@ -9,7 +9,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { Box } from '@mui/system';
 import { useHistory } from 'react-router-dom';
 import { FavoriteContext } from '../favorites/contexts/FavoriteContext';
-import { PokemonDetail } from '../pokemon/interfaces/PokemonDetail';
 
 interface PokedexProps {
 

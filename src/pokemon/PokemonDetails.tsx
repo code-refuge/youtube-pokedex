@@ -1,5 +1,5 @@
 import { Favorite } from '@mui/icons-material';
-import { AppBar, Toolbar, Typography, Container, Button, LinearProgress, Badge, Box, IconButton } from '@mui/material';
+import { AppBar, Toolbar, Typography, Container, Button, LinearProgress, Box, IconButton } from '@mui/material';
 import React, { useContext } from 'react';
 import { useQuery } from 'react-query';
 import { useHistory, useParams } from 'react-router-dom';
